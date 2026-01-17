@@ -530,7 +530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &185996292
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2462,6 +2462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 939564257}
   - component: {fileID: 939564256}
+  - component: {fileID: 939564258}
   m_Layer: 0
   m_Name: VideoPlayer
   m_TagString: Untagged
@@ -2499,9 +2500,9 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
-  m_Looping: 1
+  m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
@@ -2520,6 +2521,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &939564258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939564255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b171c8d518532f43a316fb0e2236919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EasterEgg
+  videoPlayer: {fileID: 939564256}
+  screenObject: {fileID: 185996291}
+  secretCode: 676921
 --- !u!1 &947130111
 GameObject:
   m_ObjectHideFlags: 0
