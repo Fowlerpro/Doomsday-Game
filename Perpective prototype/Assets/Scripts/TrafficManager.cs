@@ -13,7 +13,7 @@ public class TrafficManager : MonoBehaviour
         [Header("Movement")]
         public float speed = 5f;
 
-        [Header("Optional Stop")]
+        [Header("Stop")]
         public Transform stopPoint;
         public float stopDuration = 2f;
 
@@ -38,7 +38,6 @@ public class TrafficManager : MonoBehaviour
             carData.isStopped = false;
             carData.hasStoppedThisLoop = false;
 
-            // Pre-calc stop progress (0–1)
             if (carData.stopPoint != null)
             {
                 float totalDistance = Vector3.Distance(
@@ -63,7 +62,6 @@ public class TrafficManager : MonoBehaviour
             if (carData.car == null || carData.startPoint == null || carData.endPoint == null)
                 continue;
 
-            // Handle stopping
             if (carData.isStopped)
             {
                 carData.stopTimer += Time.deltaTime;
@@ -84,7 +82,6 @@ public class TrafficManager : MonoBehaviour
 
             carData.progress += (carData.speed / totalDistance) * Time.deltaTime;
 
-            // Trigger stop reliably
             if (carData.stopPoint != null &&
                 !carData.hasStoppedThisLoop &&
                 carData.progress >= carData.stopProgress)
@@ -100,7 +97,6 @@ public class TrafficManager : MonoBehaviour
                 carData.progress
             );
 
-            // Loop
             if (carData.progress >= 1f)
             {
                 carData.progress = 0f;
