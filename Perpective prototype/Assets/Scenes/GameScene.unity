@@ -484,7 +484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1597499748068395315, guid: 83bbe9dc3b48045c0a3749af5bee969d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 58.732788
+      value: 38.8
       objectReference: {fileID: 0}
     - target: {fileID: 1597499748068395315, guid: 83bbe9dc3b48045c0a3749af5bee969d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -846,7 +846,7 @@ Transform:
   m_GameObject: {fileID: 168300854}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 400.7, y: -7.5597, z: -1.9856377}
+  m_LocalPosition: {x: 488.3, y: -7.5597, z: -1.9856377}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2645,6 +2645,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395296560}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &409554470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 409554471}
+  m_Layer: 0
+  m_Name: Car2Start
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &409554471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409554470}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 362.7, y: -7.5869617, z: -34.870003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 787722594}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -3170,30 +3201,60 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrafficManager
   cars:
   - car: {fileID: 1800209553}
-    startPoint: {fileID: 710901923}
-    endPoint: {fileID: 2093022166}
-    speed: 25
+    startPoint: {fileID: 409554471}
+    endPoint: {fileID: 1291723033}
+    speed: 30
+    stopPoint: {fileID: 724736576}
+    stopDuration: 5
     progress: 0
+    isStopped: 0
+    stopTimer: 0
+    hasStoppedThisLoop: 0
+    stopProgress: 0
   - car: {fileID: 148978052}
     startPoint: {fileID: 571743236}
     endPoint: {fileID: 168300855}
-    speed: 28
+    speed: 30
+    stopPoint: {fileID: 0}
+    stopDuration: 2
     progress: 0
+    isStopped: 0
+    stopTimer: 0
+    hasStoppedThisLoop: 0
+    stopProgress: 0
   - car: {fileID: 2089115739}
     startPoint: {fileID: 1206830933}
     endPoint: {fileID: 370254934}
     speed: 30
+    stopPoint: {fileID: 1173726088}
+    stopDuration: 5
     progress: 0
+    isStopped: 0
+    stopTimer: 0
+    hasStoppedThisLoop: 0
+    stopProgress: 0
   - car: {fileID: 982297649}
     startPoint: {fileID: 346635035}
     endPoint: {fileID: 1630235209}
     speed: 30
+    stopPoint: {fileID: 0}
+    stopDuration: 2
     progress: 0
+    isStopped: 0
+    stopTimer: 0
+    hasStoppedThisLoop: 0
+    stopProgress: 0
   - car: {fileID: 164088891}
     startPoint: {fileID: 935706119}
     endPoint: {fileID: 1051907968}
-    speed: 40
+    speed: 67
+    stopPoint: {fileID: 0}
+    stopDuration: 2
     progress: 0
+    isStopped: 0
+    stopTimer: 0
+    hasStoppedThisLoop: 0
+    stopProgress: 0
 --- !u!1 &474938327
 GameObject:
   m_ObjectHideFlags: 0
@@ -4523,37 +4584,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &710901922
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 710901923}
-  m_Layer: 0
-  m_Name: Car2Start
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &710901923
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710901922}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 362.77435, y: -7.5809445, z: -35.682762}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 787722594}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &718541104
 GameObject:
   m_ObjectHideFlags: 0
@@ -4743,6 +4773,37 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &724736575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 724736576}
+  m_Layer: 0
+  m_Name: Car2Stop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &724736576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724736575}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 362.77435, y: -7.5809445, z: -12.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 787722594}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &728159390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5362,10 +5423,12 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1206830933}
+  - {fileID: 1173726088}
   - {fileID: 370254934}
   - {fileID: 62105344}
-  - {fileID: 710901923}
-  - {fileID: 2093022166}
+  - {fileID: 409554471}
+  - {fileID: 724736576}
+  - {fileID: 1291723033}
   - {fileID: 1935791032}
   - {fileID: 571743236}
   - {fileID: 168300855}
@@ -8620,6 +8683,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1413239713}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1173726087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1173726088}
+  m_Layer: 0
+  m_Name: Car1Stop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1173726088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173726087}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 358.30823, y: -7.5869617, z: 8.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 787722594}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1176559741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8780,7 +8874,7 @@ Transform:
   m_GameObject: {fileID: 1206830932}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 358.30823, y: -7.5869617, z: 58.732788}
+  m_LocalPosition: {x: 358.30823, y: -7.5869617, z: 38.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9169,6 +9263,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1413239713}
   m_LocalEulerAnglesHint: {x: 0, y: -35.918, z: 0}
+--- !u!1 &1291723032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1291723033}
+  m_Layer: 0
+  m_Name: Car2End
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1291723033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291723032}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 362.9, y: -7.5869617, z: 38.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 787722594}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1335622931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14130,37 +14255,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3a705fc8b1e3d084c80ec02e914dac0f, type: 3}
   m_PrefabInstance: {fileID: 1543536305}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2093022165
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2093022166}
-  m_Layer: 0
-  m_Name: Car2End
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2093022166
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2093022165}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 362.77435, y: -7.5809445, z: 56.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 787722594}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2131345873
 GameObject:
   m_ObjectHideFlags: 0
