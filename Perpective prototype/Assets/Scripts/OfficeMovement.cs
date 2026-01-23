@@ -9,9 +9,14 @@ public class OfficeMovement : MonoBehaviour
     public GameObject blurObject;
     public float fadeDuration = 2f;
 
+    public GameObject pcToggleObject;
+
     private bool toggled;
     private int spacePressCount;
     private bool blurRunning;
+
+    private bool windowViewActive;
+    private bool pcViewActive;
 
     private Material blurMat;
 
@@ -28,15 +33,19 @@ public class OfficeMovement : MonoBehaviour
                 SetAlpha01(0f);
             }
         }
+
+        if (pcToggleObject != null)
+            pcToggleObject.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !pcViewActive)
         {
             spacePressCount++;
 
             toggled = !toggled;
+            windowViewActive = toggled;
 
             foreach (GameObject obj in disableOnToggle)
             {
@@ -55,6 +64,14 @@ public class OfficeMovement : MonoBehaviour
                 StartCoroutine(FadeOutRoutine());
                 spacePressCount = 0;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.W) && !windowViewActive)
+        {
+            pcViewActive = !pcViewActive;
+
+            if (pcToggleObject != null)
+                pcToggleObject.SetActive(pcViewActive);
         }
     }
 
