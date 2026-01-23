@@ -3,11 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class ContinueButton : MonoBehaviour
 {
+    bool sceneQueued = false;
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !sceneQueued)
         {
-            SceneManager.LoadScene("GameScene");
+            sceneQueued = true;
+            Invoke(nameof(LoadScene), 2.5f);
         }
+    }
+
+    void LoadScene()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }
