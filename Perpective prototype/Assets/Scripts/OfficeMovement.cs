@@ -12,7 +12,6 @@ public class OfficeMovement : MonoBehaviour
     public GameObject pcToggleObject;
 
     private bool toggled;
-    private int spacePressCount;
     private bool blurRunning;
 
     private bool windowViewActive;
@@ -42,8 +41,6 @@ public class OfficeMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !pcViewActive)
         {
-            spacePressCount++;
-
             toggled = !toggled;
             windowViewActive = toggled;
 
@@ -59,11 +56,11 @@ public class OfficeMovement : MonoBehaviour
                     obj.SetActive(toggled);
             }
 
-            if (spacePressCount == 2 && !blurRunning)
+            if (!blurRunning)
             {
                 StartCoroutine(FadeOutRoutine());
-                spacePressCount = 0;
             }
+
         }
 
         if (Input.GetKeyDown(KeyCode.W) && !windowViewActive)
