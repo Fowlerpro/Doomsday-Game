@@ -1,0 +1,5 @@
+event spreadsheets,event name,description,money affected,resource1 affected,resource2 affected,resource3 affected,polution affected (between -3 to 5
+choice1,the event ever,this is a test this is a test this is a test,-40,25,-10,0,4
+choice2,the event ever,,0,-25,0,10,-1
+choice1,event2,this is swag,6,7,7,0,7
+choice2,event2,,26,62,0,0,10
