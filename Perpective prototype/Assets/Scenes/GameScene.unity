@@ -4305,13 +4305,14 @@ GameObject:
   - component: {fileID: 334789053}
   - component: {fileID: 334789055}
   - component: {fileID: 334789054}
+  - component: {fileID: 334789056}
   m_Layer: 0
   m_Name: Computer (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &334789053
 Transform:
   m_ObjectHideFlags: 0
@@ -4383,6 +4384,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334789052}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &334789056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334789052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e477ebbf26768fa4ab090f01cdfc847d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  cursor: {fileID: 334789052}
+  offset: {x: 0.1, y: -0.1}
+  distance: 4.3
+  min: {x: -2.19, y: 6.28}
+  max: {x: 2.35, y: 8.13}
 --- !u!1001 &337587797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13745,6 +13763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ComputerManager
   Screen: {fileID: 1640193828}
+  Cursor: {fileID: 334789052}
   Loading: {fileID: 2268493}
   fadeDuration: 0.5
   anchorDelay: 2
