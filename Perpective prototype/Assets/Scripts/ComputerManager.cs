@@ -8,6 +8,7 @@ using UnityEngine.Video;
 public class ComputerManager : MonoBehaviour
 {
     public GameObject Screen;
+    public GameObject Cursor;
     public RawImage Loading;
     public float fadeDuration = 0.5f;
     float delay;
@@ -30,6 +31,7 @@ public class ComputerManager : MonoBehaviour
                 inputLocked = true;
                 delay = anchorDelay;
                 Screen.SetActive(false);
+                Cursor.SetActive(true);
                 ColorTransparency(1f);
                 PlayVideo(loadingClip);
                 StartCoroutine(FadeAfterDelay());
@@ -44,6 +46,7 @@ public class ComputerManager : MonoBehaviour
     {
         player.Stop();
         Screen.SetActive(true);
+        Cursor.SetActive(false);
         inputLocked = false;
     }
     IEnumerator FadeAfterDelay()
