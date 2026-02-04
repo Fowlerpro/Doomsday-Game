@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class EndDay : MonoBehaviour
 {
-    private Animator StampAnim;
+    private Animator PrinterAnim;
 
     void Start()
     {
-        StampAnim = GetComponent<Animator>();
+        PrinterAnim = GetComponent<Animator>();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            StampAnim.SetTrigger("EPress");
+            PrinterAnim.SetTrigger("EPress");
         }
     }
 }
