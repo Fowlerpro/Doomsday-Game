@@ -1,5 +1,9 @@
-event spreadsheets,event name,description,money affected,resource1 affected,resource2 affected,resource3 affected,polution affected (between -3 to 5
-choice1,the event ever,this is a test this is a test this is a test,-40,25,-10,0,4
-choice2,the event ever,,0,-25,0,10,-1
-choice1,event2,this is swag,6,7,7,0,7
-choice2,event2,,26,62,0,0,10
+event spreadsheets,event type,event name,threat,description,money affected,resource1 affected,resource2 affected,resource3 affected,polution affected (between -3 to 5,time,cost
+Comp,major,the event ever,desc,you really did it,-40,25,-10,0,4,4,20
+Fail,major,the event ever,,uh oh,0,-25,0,10,-1,4,20
+Comp,minor,event2,desc2,this is swag,6,7,7,0,7,4,15
+Fail,minor,event2,,no,26,62,0,0,10,4,30
+Comp,major,,,,,,,,,,
+Fail,major,,,,,,,,,,
+Comp,minor,,,,,,,,,,
+Fail,minor,,,,,,,,,,

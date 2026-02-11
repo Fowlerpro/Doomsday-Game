@@ -14,8 +14,8 @@ public class TurnProgression
     public int resource2;
     public int resource3;
     public int turnCounter = 0;
-
-    public List<EventType> CurrentEvents;
+    public RandomEvents randomEvents;
+    public List<EventData> CurrentEvents;
     
 
 
@@ -28,27 +28,30 @@ public class TurnProgression
 
 
 
-    void sceneEnding(bool sceneEnd) // this runs when the turn ends
+    void TurnEnd(bool sceneEnd) // this runs when the turn ends
     {
         if (sceneEnd)
         {
+            
             turnCounter += 1;
-            foreach (EventType currentEvent in CurrentEvents)
+            foreach (EventData currentEvent in CurrentEvents)
             {
-                currentEvent.timeCost -= 1;
-                if (currentEvent.timeCost <= 0)
+                currentEvent.turnsLeft -= 1;
+                if (currentEvent.CheckEventDone())
                 {
-                    resourcePkg resourcesAffected = currentEvent.EventChoice(currentEvent.chosen);
+                    int[] resourcesAffected = currentEvent.EventChoice();
                     CurrentEvents.Remove(currentEvent);
-                    int[] FinalPackage = resourcesAffected.ResourceGet();
-                    resource1 += FinalPackage[0];
-                    resource2 += FinalPackage[1];
-                    resource3 += FinalPackage[2];
-                    polution += FinalPackage[3];
-
+                    resource1 += resourcesAffected[0];
+                    resource2 += resourcesAffected[1];
+                    resource3 += resourcesAffected[2];
+                    money += resourcesAffected[3];
+                    polution += resourcesAffected[4];
+                    CurrentEvents.Remove(currentEvent);
                     
                 }
             }
+            CurrentEvents.Add(randomEvents.GetRandomEvent(true));
+            CurrentEvents.Add(randomEvents.GetRandomEvent(false));
             if (turnCounter == 24)
             {
                 // game end
