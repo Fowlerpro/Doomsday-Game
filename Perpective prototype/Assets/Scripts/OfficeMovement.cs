@@ -9,13 +9,15 @@ public class OfficeMovement : MonoBehaviour
     public GameObject blurObject;
     public float fadeDuration = 2f;
 
-    public GameObject pcToggleObject;
+    public GameObject pcToggle;
+    public GameObject phoneToggle;
 
     private bool toggled;
     private bool blurRunning;
 
     private bool windowViewActive;
     private bool pcViewActive;
+    private bool phoneViewActive;
 
     private Material blurMat;
 
@@ -33,13 +35,16 @@ public class OfficeMovement : MonoBehaviour
             }
         }
 
-        if (pcToggleObject != null)
-            pcToggleObject.SetActive(false);
+        if (phoneToggle != null)
+            phoneToggle.SetActive(false);
+
+        if (pcToggle != null)
+            pcToggle.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !pcViewActive)
+        if (Input.GetKeyDown(KeyCode.Space) && !pcViewActive && !phoneViewActive)
         {
             toggled = !toggled;
             windowViewActive = toggled;
@@ -57,20 +62,43 @@ public class OfficeMovement : MonoBehaviour
             }
 
             if (!blurRunning)
-            {
                 StartCoroutine(FadeOutRoutine());
-            }
-
         }
 
-        if (Input.GetKeyDown(KeyCode.W) && !windowViewActive)
+        if (Input.GetKeyDown(KeyCode.W) && !windowViewActive && !phoneViewActive)
         {
             pcViewActive = !pcViewActive;
 
-            if (pcToggleObject != null)
-                pcToggleObject.SetActive(pcViewActive);
+            if (pcToggle != null)
+                pcToggle.SetActive(pcViewActive);
+
+            windowViewActive = false;
+            toggled = false;
+
+            if (phoneToggle != null)
+                phoneToggle.SetActive(false);
+
+            phoneViewActive = false;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Q) && !windowViewActive && !pcViewActive)
+        {
+            phoneViewActive = !phoneViewActive;
+
+            if (phoneToggle != null)
+                phoneToggle.SetActive(phoneViewActive);
+
+            windowViewActive = false;
+            toggled = false;
+
+            if (pcToggle != null)
+                pcToggle.SetActive(false);
+
+            pcViewActive = false;
         }
     }
+
 
     IEnumerator FadeOutRoutine()
     {
