@@ -51,7 +51,7 @@ public class ComputerManager : MonoBehaviour
         player.Stop();
         Screen.SetActive(true);
         Cursor.SetActive(false);
-        ButtonCanvas.SetActive(false);
+        //ButtonCanvas.SetActive(false);
         inputLocked = false;
         buttonTime = 0f;
     }
@@ -87,15 +87,15 @@ public class ComputerManager : MonoBehaviour
         lfade.a = Alpha;
         Loading.color = lfade;
     }
-    void SpawnButton()
-    {
-        buttonTime += Time.deltaTime;
-        if (buttonTime >= buttonTimer)
-        {
-            ButtonCanvas.SetActive(true);
-            Debug.Log(buttonTime);
-        }
-    }
+    //void SpawnButton()
+    //{
+    //    buttonTime += Time.deltaTime;
+    //    if (buttonTime >= buttonTimer)
+    //    {
+    //        ButtonCanvas.SetActive(true);
+    //        Debug.Log(buttonTime);
+    //    }
+    //}
 
     void OnVideoFinished(VideoPlayer vp)
     {
