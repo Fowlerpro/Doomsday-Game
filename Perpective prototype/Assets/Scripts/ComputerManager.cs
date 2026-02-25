@@ -14,7 +14,6 @@ public class ComputerManager : MonoBehaviour
     public float fadeDuration = 0.5f;
     float delay;
     float buttonTimer = 4f;
-    float buttonTime = 0f;
     public float anchorDelay = 2.0f;
     public VideoClip loadingClip;
     public VideoPlayer player;
