@@ -13,7 +13,7 @@ public class ComputerManager : MonoBehaviour
     public GameObject ButtonCanvas;
     public float fadeDuration = 0.5f;
     float delay;
-    float buttonTimer = 4f;
+    float buttonTimer = 3f;
     public float anchorDelay = 2.0f;
     public VideoClip loadingClip;
     public VideoPlayer player;
@@ -37,7 +37,8 @@ public class ComputerManager : MonoBehaviour
                 ColorTransparency(1f);
                 PlayVideo(loadingClip);
                 StartCoroutine(FadeAfterDelay());
-                //SpawnButton();
+                StartCoroutine(SpawnButton());
+                
             }
             else
             {
@@ -50,9 +51,9 @@ public class ComputerManager : MonoBehaviour
         player.Stop();
         Screen.SetActive(true);
         Cursor.SetActive(false);
-        //ButtonCanvas.SetActive(false);
+        ButtonCanvas.SetActive(false);
         inputLocked = false;
-        buttonTime = 0f;
+        
     }
     IEnumerator FadeAfterDelay()
     {
@@ -86,15 +87,15 @@ public class ComputerManager : MonoBehaviour
         lfade.a = Alpha;
         Loading.color = lfade;
     }
-    //void SpawnButton()
-    //{
-    //    buttonTime += Time.deltaTime;
-    //    if (buttonTime >= buttonTimer)
-    //    {
-    //        ButtonCanvas.SetActive(true);
-    //        Debug.Log(buttonTime);
-    //    }
-    //}
+    IEnumerator SpawnButton()
+    {
+        yield return new WaitForSeconds(buttonTimer);
+
+        ButtonCanvas.SetActive(true);
+            
+        
+        
+    }
 
     void OnVideoFinished(VideoPlayer vp)
     {

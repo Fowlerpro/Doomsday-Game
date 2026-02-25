@@ -4,10 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class ToTitle : MonoBehaviour
 {
-   bool isActive = false;
- //public void OnButtonClick()
- //   {
- //       isActive = true;
- //       SceneManager.LoadScene("TitleScreen");
- //   }
+    public void OnButtonClick()
+    {
+        
+        SceneManager.LoadScene("TitleScreen");
+    }
 }
