@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ActivateButton : MonoBehaviour
+public class ActivateButtonEvent : MonoBehaviour
 {
  public GameObject NewCanvas;
  public GameObject OldCanvas;
