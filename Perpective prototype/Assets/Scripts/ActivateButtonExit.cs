@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ActivateButtonGuide : MonoBehaviour
+public class ActivateButtonExit : MonoBehaviour
 {
     public GameObject NewCanvas;
     public GameObject OldCanvas;
