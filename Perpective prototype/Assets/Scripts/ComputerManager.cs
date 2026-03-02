@@ -10,8 +10,10 @@ public class ComputerManager : MonoBehaviour
     public GameObject Screen;
     public GameObject Cursor;
     public RawImage Loading;
+    public GameObject ButtonCanvas;
     public float fadeDuration = 0.5f;
     float delay;
+    float buttonTimer = 3f;
     public float anchorDelay = 2.0f;
     public VideoClip loadingClip;
     public VideoPlayer player;
@@ -35,6 +37,8 @@ public class ComputerManager : MonoBehaviour
                 ColorTransparency(1f);
                 PlayVideo(loadingClip);
                 StartCoroutine(FadeAfterDelay());
+                StartCoroutine(SpawnButton());
+                
             }
             else
             {
@@ -47,7 +51,9 @@ public class ComputerManager : MonoBehaviour
         player.Stop();
         Screen.SetActive(true);
         Cursor.SetActive(false);
+        ButtonCanvas.SetActive(false);
         inputLocked = false;
+        
     }
     IEnumerator FadeAfterDelay()
     {
@@ -81,6 +87,16 @@ public class ComputerManager : MonoBehaviour
         lfade.a = Alpha;
         Loading.color = lfade;
     }
+    IEnumerator SpawnButton()
+    {
+        yield return new WaitForSeconds(buttonTimer);
+
+        ButtonCanvas.SetActive(true);
+            
+        
+        
+    }
+
     void OnVideoFinished(VideoPlayer vp)
     {
         vp.Stop();
