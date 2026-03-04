@@ -29,14 +29,17 @@ public class RandomEvents : MonoBehaviour
         EventData currentEvent;
         if (isMajorEvent)
         {
-
-            eventNum = Random.Range(0, MajorEventList.Count);
+            eventNum = Random.Range(0, MajorEventList.Count-1);
+            /*
+            Debug.Log(eventNum);
+            Debug.Log(MajorEventList.Count);
+            */
             currentEvent = MajorEventList[eventNum];
         }
         else
         {
             //eventNum = Random.Range(0, eventList.Count) -1;
-            eventNum = Random.Range(0, eventList.Count);
+            eventNum = Random.Range(0, eventList.Count-1);
             currentEvent = eventList[eventNum];
         }
         
