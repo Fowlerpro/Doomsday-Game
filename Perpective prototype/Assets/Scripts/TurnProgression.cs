@@ -28,17 +28,7 @@ public class TurnProgression : MonoBehaviour
 
     private void FixedUpdate()
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TurnEnd(true);
-        }
-        else if(Input.GetKeyDown(KeyCode.S))
-        {
-            //Debug.Log("hmmm");
-            AddEvent(true);
-        }
-        */
+
     }
 
     private void AddEvent(bool IsMajor)
@@ -47,26 +37,26 @@ public class TurnProgression : MonoBehaviour
     }
 
 
-    public void TurnEnd(bool sceneEnd) // this runs when the turn ends
+    void TurnEnd(bool sceneEnd) // this runs when the turn ends
     {
         if (sceneEnd)
         {
             
             turnCounter += 1;
-            for (int i = 0; i < CurrentEvents.Count; i++)
+            foreach (EventData currentEvent in CurrentEvents)
             {
-                CurrentEvents[i].turnsLeft -= 1;
-                if (CurrentEvents[i].CheckEventDone())
+                currentEvent.turnsLeft -= 1;
+                if (currentEvent.CheckEventDone())
                 {
-                    int[] resourcesAffected = CurrentEvents[i].EventChoice(true);
-                    int[] extraResAffected = CurrentEvents[i].EventChoice(false);
-                    //CurrentEvents.Remove(CurrentEvents[i]);
+                    int[] resourcesAffected = currentEvent.EventChoice(true);
+                    int[] extraResAffected = currentEvent.EventChoice(false);
+                    CurrentEvents.Remove(currentEvent);
                     trade += resourcesAffected[0];
                     culture += resourcesAffected[1];
                     industry += resourcesAffected[2];
                     bexlyMoney += extraResAffected[0];
                     polution += extraResAffected[1];
-                    CurrentEvents.Remove(CurrentEvents[i]);
+                    CurrentEvents.Remove(currentEvent);
                     
                 }
             }
@@ -78,7 +68,6 @@ public class TurnProgression : MonoBehaviour
             }
             // scene.load;
             sceneEnd = false;
-            //Debug.Log("gameEnd");
         }
 
     }
