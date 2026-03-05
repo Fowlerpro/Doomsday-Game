@@ -15924,7 +15924,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 618356189}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1090600137}
+        m_TargetAssemblyTypeName: EventUI, Assembly-CSharp
+        m_MethodName: SubtractPayment
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &618356189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19109,17 +19121,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733033503}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.9909992}
+  m_LocalPosition: {x: 0, y: 0, z: 1.0689996}
   m_LocalScale: {x: 0.03, y: 0.009, z: 0.049999997}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 314527659}
   - {fileID: 463185075}
-  m_Father: {fileID: 1981094501}
+  m_Father: {fileID: 1631736609}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.236, y: 0.536}
+  m_AnchoredPosition: {x: -0.23600012, y: 0.53599954}
   m_SizeDelta: {x: 20.0227, y: 119.2618}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &733033505
@@ -28765,6 +28777,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1090600136}
+  - component: {fileID: 1090600139}
+  - component: {fileID: 1090600138}
+  - component: {fileID: 1090600137}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -28787,6 +28802,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1090600137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090600135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ffea4c33f75c52488bf0c6390d35ac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EventUI
+  majorEvent: {fileID: 1631736608}
+  minorEvent1: {fileID: 136664054}
+  minorEvent2: {fileID: 901519794}
+  ObjectList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &1090600138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090600135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf093bb1666e484397d245e9ee98c06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RandomEvents
+--- !u!114 &1090600139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090600135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976de77115c471b4ba0406b00c1ca3cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TurnProgression
+  polution: 0
+  money: 0
+  culture: 0
+  industry: 0
+  trade: 0
+  turnCounter: 0
+  bexlyMoney: 5
+  randomEvents: {fileID: 1090600138}
 --- !u!1001 &1090602738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34352,7 +34418,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1309836228}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1090600137}
+        m_TargetAssemblyTypeName: EventUI, Assembly-CSharp
+        m_MethodName: AddPayment
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1309836228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36071,7 +36149,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1376423466}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1090600137}
+        m_TargetAssemblyTypeName: EventUI, Assembly-CSharp
+        m_MethodName: SubtractPayment
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1376423466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37756,7 +37846,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1467104241}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1090600137}
+        m_TargetAssemblyTypeName: EventUI, Assembly-CSharp
+        m_MethodName: AddPayment
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1467104241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41848,6 +41950,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 733033504}
   - {fileID: 145768783}
   - {fileID: 1010686980}
   - {fileID: 1234766881}
@@ -42669,7 +42772,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1654120337}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1090600137}
+        m_TargetAssemblyTypeName: EventUI, Assembly-CSharp
+        m_MethodName: SubtractPayment
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1654120337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49963,7 +50078,6 @@ RectTransform:
   - {fileID: 423852541}
   - {fileID: 1394650121}
   - {fileID: 1631736609}
-  - {fileID: 733033504}
   - {fileID: 136664055}
   - {fileID: 901519795}
   m_Father: {fileID: 1025436439}
@@ -51803,7 +51917,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2071092622}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1090600137}
+        m_TargetAssemblyTypeName: EventUI, Assembly-CSharp
+        m_MethodName: AddPayment
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2071092622
 MonoBehaviour:
   m_ObjectHideFlags: 0

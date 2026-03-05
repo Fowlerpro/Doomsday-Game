@@ -14,10 +14,11 @@ public class EventData
     private int[] extraRes2;
     public int cost { get; private set; }
     public int paid { get; private set; }
-    private bool isMajor;
+    public bool isMajor { get; private set; }
     public bool isSoOver; // its so over (if you lose)
     private EventData secondaryEvent = null;
     public int turnsLeft = 0;
+    public int toPay = 0;
 
     public int deadline;
     public EventData(string name, bool isMajor)
@@ -49,19 +50,22 @@ public class EventData
         //Debug.Log("SAVE MY SOUL");
         
     }
-    public int PayCost(int pay)
+    public void PayCost()
     {
-        int change = 0;
+        //int change = 0;
         // 20    15 + 10       change should be 5
         // 25 - 20
+        /*
         if (cost < pay + paid)
         {
             change = pay + paid - cost;
             pay -= change;
         }
-        paid += pay;
-
-        return change;
+        */
+        //if (pay =)
+        paid += toPay;
+        toPay = 0;
+        //return change;
     }
     public bool CheckEventDone()
     {
