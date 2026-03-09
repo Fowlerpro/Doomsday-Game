@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 
@@ -21,13 +23,13 @@ public class TurnProgression : MonoBehaviour
     public int trade;
     public int money { get; private set; } = 0;
     public int turnCounter = 0;
-    public int bexlyMoney = 5;
+    public int bexlyMoney = 4;
     public RandomEvents randomEvents;
     public List<EventData> CurrentEvents = new List<EventData>(1);
     private EventUI UiEvents;
     bool firstrun = true;
     public GameObject MoneySlider;
-
+    public bool turnover = true;
     void Start()
     {
         randomEvents.ImportEvents(); // imports the basic info about events
@@ -60,12 +62,32 @@ public class TurnProgression : MonoBehaviour
             firstrun =false;
         }
         */
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            
+            //StartCoroutine
+
+            if (turnover)
+            {
+                //Debug.Log("test2");
+                turnover = false;
+                StartCoroutine(WaitLike5Seconds());
+
+                TurnEnd(true);
+
+            }
+        }
     }
 
+    IEnumerator WaitLike5Seconds()
+    {
+        yield return new WaitForSeconds(7);
+        turnover = true;
+    }
     private void AddEvent(bool IsMajor)
     {
         CurrentEvents.Add(randomEvents.GetRandomEvent(IsMajor));
-        UiEvents.addEvent(CurrentEvents[CurrentEvents.Count - 1].name);
+        UiEvents.addEvent(CurrentEvents[CurrentEvents.Count - 1].name, CurrentEvents[CurrentEvents.Count-1].turnsLeft);
     }
 
     public int FindEvent(string eventName)
@@ -86,6 +108,9 @@ public class TurnProgression : MonoBehaviour
         {
             
             turnCounter += 1;
+            List<int> eventRemove = new List<int>();
+            int counter = 0;
+            bool addMajor = false;
             foreach (EventData currentEvent in CurrentEvents)
             {
                 currentEvent.turnsLeft -= 1;
@@ -97,19 +122,43 @@ public class TurnProgression : MonoBehaviour
                     //CurrentEvents.Remove(currentEvent);
                     if (currentEvent.isMajor)
                     {
-                        AddEvent(true);
+                        addMajor = true;
+                        
                     }
                     trade += resourcesAffected[0];
                     culture += resourcesAffected[1];
                     industry += resourcesAffected[2];
                     bexlyMoney += extraResAffected[0];
                     polution += extraResAffected[1];
-                    CurrentEvents.Remove(currentEvent);
-                    
+                    //CurrentEvents.Remove(currentEvent);
+                    eventRemove.Add(counter);
                 }
+                counter++;
             }
+            foreach(int count in eventRemove)
+            {
+                CurrentEvents.RemoveAt(count);
+                UiEvents.removeEvent(count);
+            }
+            UiEvents.UpdateEventTurnCounter();
+            
+            money = 0;
+            int MoneyThisTurn = 0;
+            MoneyThisTurn = (int)trade + bexlyMoney;
+            if (MoneyThisTurn > 8)
+            {
+                MoneyThisTurn = 8;
+            }
+            MoneyChange(MoneyThisTurn);
+            bexlyMoney = 4;
+            //Debug.Log("turn " + turnCounter);
+
             //AddEvent(true); // todo, adjust, it shouldn't add a new major event every time
-            if(CurrentEvents.Count < 3)
+            if (addMajor)
+            {
+                AddEvent(true);
+            }
+            if (CurrentEvents.Count < 3)
             {
                 AddEvent(false);
             }
@@ -120,6 +169,7 @@ public class TurnProgression : MonoBehaviour
             }
             // scene.load;
             sceneEnd = false;
+
         }
 
     }

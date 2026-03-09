@@ -26,34 +26,40 @@ public class EventUI : MonoBehaviour
     // Update is called once per frame
     public void AddPayment(int EventNum)
     {
-        string EventName = ObjectList[EventNum].GetComponentInChildren<TextMeshProUGUI>().text;
-        int actualNum = turnProgress.FindEvent(EventName);
-
-        if (turnProgress.CurrentEvents[actualNum].toPay + turnProgress.CurrentEvents[actualNum].paid < turnProgress.CurrentEvents[actualNum].cost)
+        if (turnProgress.turnover)
         {
-            if (turnProgress.MoneyChange(-1))
+            string EventName = ObjectList[EventNum].GetComponentInChildren<TextMeshProUGUI>().text;
+            int actualNum = turnProgress.FindEvent(EventName);
+
+            if (turnProgress.CurrentEvents[actualNum].toPay + turnProgress.CurrentEvents[actualNum].paid < turnProgress.CurrentEvents[actualNum].cost)
             {
-                turnProgress.CurrentEvents[actualNum].toPay += 1;
+                if (turnProgress.MoneyChange(-1))
+                {
+                    turnProgress.CurrentEvents[actualNum].toPay += 1;
+                }
+
             }
-            
+            UpdateSlider(EventNum, actualNum);
         }
-        UpdateSlider(EventNum, actualNum);
     }
 
     public void SubtractPayment(int EventNum)
     {
-        string EventName = ObjectList[EventNum].GetComponentInChildren<TextMeshProUGUI>().text;
-        int actualNum = turnProgress.FindEvent(EventName);
-
-        if (turnProgress.CurrentEvents[actualNum].toPay > 0)
+        if (turnProgress.turnover)
         {
-            if (turnProgress.MoneyChange(1))
+            string EventName = ObjectList[EventNum].GetComponentInChildren<TextMeshProUGUI>().text;
+            int actualNum = turnProgress.FindEvent(EventName);
+
+            if (turnProgress.CurrentEvents[actualNum].toPay > 0)
             {
-                turnProgress.CurrentEvents[actualNum].toPay -= 1;
+                if (turnProgress.MoneyChange(1))
+                {
+                    turnProgress.CurrentEvents[actualNum].toPay -= 1;
+                }
+                //turnProgress.money += 1;
             }
-            //turnProgress.money += 1;
+            UpdateSlider(EventNum, actualNum);
         }
-        UpdateSlider(EventNum, actualNum);
     }
 
 
@@ -66,8 +72,22 @@ public class EventUI : MonoBehaviour
     {
         
     }
+    public void UpdateEventTurnCounter()
+    {
+        foreach(GameObject eventPart in ObjectList)
+        {
+            if (eventPart.activeSelf)
+            {
+                string eventText = eventPart.GetComponentsInChildren<TextMeshProUGUI>(true)[1].text;
+                int turnsLeft = int.Parse(eventText.Substring(13));
+                turnsLeft--;
+                //Debug.Log(turnsLeft);
+                eventPart.GetComponentsInChildren<TextMeshProUGUI>(true)[1].text = "Turns Left: \n" + turnsLeft;
+            }
+        }
+    }
     
-    public void addEvent(string eventName)
+    public void addEvent(string eventName, int turnsTotal)
     {
         //Debug.Log(eventName);
         int eventNumber = -1;
@@ -89,13 +109,14 @@ public class EventUI : MonoBehaviour
         //Debug.Log(eventName)
 
         //GameObject textmesh = ObjectList[eventNumber].GetComponentInChildren<TextMesh>(true);
-        ObjectList[eventNumber].GetComponentInChildren<TextMeshProUGUI>(true).text = eventName;
+        ObjectList[eventNumber].GetComponentsInChildren<TextMeshProUGUI>(true)[0].text = eventName;
+        ObjectList[eventNumber].GetComponentsInChildren<TextMeshProUGUI>(true)[1].text = "Turns Left: \n"+turnsTotal;
         int actualNum = turnProgress.FindEvent(eventName);
         UpdateSlider(eventNumber, actualNum);
     }
-    public void removeEvent(string eventName)
+    public void removeEvent(int eventnumber)
     {
-
+        ObjectList[eventnumber].SetActive(false);
     }
     
 }

@@ -34,34 +34,39 @@ public class SliderScript : MonoBehaviour
     public void AddPayment(int EventNum)
     {
         //string EventName = ObjectList[EventNum].GetComponentInChildren<TextMeshProUGUI>().text;
-        if (slidernums[EventNum] < 4)
+        if (turnProgress.turnover)
         {
-            if (turnProgress.MoneyChange(-1))
+            if (slidernums[EventNum] < 4)
             {
+                if (turnProgress.MoneyChange(-1))
+                {
 
-                slidernums[EventNum]++;
-                UpdateSlider(EventNum);
-                UpdateValues(1, EventNum);
+                    slidernums[EventNum]++;
+                    UpdateSlider(EventNum);
+                    UpdateValues(1, EventNum);
+                }
+
             }
-
         }
     }
 
     public void SubtractPayment(int EventNum)
     {
         //string EventName = ObjectList[EventNum].GetComponentInChildren<TextMeshProUGUI>().text;
-        
-        if (slidernums[EventNum] > 0)
+        if (turnProgress.turnover)
         {
-            if (turnProgress.MoneyChange(1))
+            if (slidernums[EventNum] > 0)
             {
-                slidernums[EventNum]--;
-                //turnProgress.money++;
-                UpdateSlider(EventNum);
-                UpdateValues(-1, EventNum);
+                if (turnProgress.MoneyChange(1))
+                {
+                    slidernums[EventNum]--;
+                    //turnProgress.money++;
+                    UpdateSlider(EventNum);
+                    UpdateValues(-1, EventNum);
+                }
+
+
             }
-            
-            
         }
     }
     public void UpdateValues(int change, int eventNum)
