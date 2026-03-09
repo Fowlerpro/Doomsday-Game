@@ -10,10 +10,11 @@ public class ComputerManager : MonoBehaviour
     public GameObject Screen;
     public GameObject Cursor;
     public RawImage Loading;
+    public GameObject LoadingCanvas;
     public GameObject ButtonCanvas;
     public float fadeDuration = 0.5f;
     float delay;
-    float buttonTimer = 3f;
+    float buttonTimer = 2f;
     public float anchorDelay = 2.0f;
     public VideoClip loadingClip;
     public VideoPlayer player;
@@ -30,6 +31,7 @@ public class ComputerManager : MonoBehaviour
 
             if (!inputLocked)
             {
+                LoadingCanvas.SetActive(true);
                 inputLocked = true;
                 delay = anchorDelay;
                 Screen.SetActive(false);
@@ -90,7 +92,7 @@ public class ComputerManager : MonoBehaviour
     IEnumerator SpawnButton()
     {
         yield return new WaitForSeconds(buttonTimer);
-
+        LoadingCanvas.SetActive(false);
         ButtonCanvas.SetActive(true);
             
         
