@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -10,17 +11,22 @@ public class TurnProgression : MonoBehaviour
 {
     bool sceneEnd = false;
     public int polution = 0;
-    public int money = 0;
+    
     public int culture; // rep
+    public int rep;
+
     public int industry; // eng
+    public int energy;
+
     public int trade;
+    public int money { get; private set; } = 0;
     public int turnCounter = 0;
     public int bexlyMoney = 5;
     public RandomEvents randomEvents;
     public List<EventData> CurrentEvents = new List<EventData>(1);
     private EventUI UiEvents;
     bool firstrun = true;
-
+    public GameObject MoneySlider;
 
     void Start()
     {
@@ -28,8 +34,22 @@ public class TurnProgression : MonoBehaviour
         UiEvents = this.GetComponent<EventUI>();
         AddEvent(true);
         AddEvent(false);
+        MoneyChange(8);
     }
-
+    public bool MoneyChange(int Change)
+    {
+        if(money + Change >= 0 && money + Change <= 8)
+        {
+            money += Change;
+            MoneySlider.GetComponent<Slider>().value = money;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
     private void FixedUpdate()
     {
         /*
