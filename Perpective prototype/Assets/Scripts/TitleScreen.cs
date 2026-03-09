@@ -10,7 +10,14 @@ public class TitleScreen : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
-    public void ToggleOverlay()
+    public void ToggleOverlayOn()
+    {
+        if (InfoScreen != null)
+        {
+            InfoScreen.SetActive(!InfoScreen.activeSelf);
+        }
+    }
+    public void ToggleOverlayOff()
     {
         if (InfoScreen != null)
         {
