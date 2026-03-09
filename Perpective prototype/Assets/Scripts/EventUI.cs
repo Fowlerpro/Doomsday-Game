@@ -31,8 +31,11 @@ public class EventUI : MonoBehaviour
 
         if (turnProgress.CurrentEvents[actualNum].toPay + turnProgress.CurrentEvents[actualNum].paid < turnProgress.CurrentEvents[actualNum].cost)
         {
-            turnProgress.CurrentEvents[actualNum].toPay += 1;
-            turnProgress.money -= 1;
+            if (turnProgress.MoneyChange(-1))
+            {
+                turnProgress.CurrentEvents[actualNum].toPay += 1;
+            }
+            
         }
         UpdateSlider(EventNum, actualNum);
     }
@@ -44,8 +47,11 @@ public class EventUI : MonoBehaviour
 
         if (turnProgress.CurrentEvents[actualNum].toPay > 0)
         {
-            turnProgress.CurrentEvents[actualNum].toPay -= 1;
-            turnProgress.money += 1;
+            if (turnProgress.MoneyChange(1))
+            {
+                turnProgress.CurrentEvents[actualNum].toPay -= 1;
+            }
+            //turnProgress.money += 1;
         }
         UpdateSlider(EventNum, actualNum);
     }
