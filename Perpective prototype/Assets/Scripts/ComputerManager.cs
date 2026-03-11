@@ -19,6 +19,8 @@ public class ComputerManager : MonoBehaviour
     public VideoClip loadingClip;
     public VideoPlayer player;
     bool inputLocked = false;
+    bool spaceBarPressed = false;
+    bool phonePressed = false;
     private void Start()
     {
         player.loopPointReached += OnVideoFinished;
@@ -26,10 +28,34 @@ public class ComputerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!inputLocked)
+            {
+                inputLocked = true;
+                spaceBarPressed = true;
+            }
+            else
+            { 
+                StopLock();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (!inputLocked)
+            {
+                inputLocked = true;
+                phonePressed = true;
+            }
+            else
+            {
+                StopLock();
+            }
+        }
         if (Input.GetKeyDown(KeyCode.W))
         {
 
-            if (!inputLocked)
+            if (!inputLocked && !spaceBarPressed)
             {
                 LoadingCanvas.SetActive(true);
                 inputLocked = true;
@@ -42,7 +68,7 @@ public class ComputerManager : MonoBehaviour
                 StartCoroutine(SpawnButton());
                 
             }
-            else
+            else if (!spaceBarPressed && !phonePressed)
             {
                 StopLock();
             }
@@ -55,7 +81,9 @@ public class ComputerManager : MonoBehaviour
         Cursor.SetActive(false);
         ButtonCanvas.SetActive(false);
         inputLocked = false;
-        
+        spaceBarPressed = false;
+        phonePressed = false;
+
     }
     IEnumerator FadeAfterDelay()
     {
