@@ -30219,6 +30219,8 @@ MonoBehaviour:
   bexlyMoney: 5
   randomEvents: {fileID: 1090600138}
   MoneySlider: {fileID: 1767460190}
+  RepSlider: {fileID: 1475384009}
+  EnergySlider: {fileID: 1023686994}
   turnover: 1
 --- !u!114 &1090600140
 MonoBehaviour:
