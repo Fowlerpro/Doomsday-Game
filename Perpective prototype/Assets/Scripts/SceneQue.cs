@@ -1,16 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ContinueButton : MonoBehaviour
+public class SceneQue : MonoBehaviour
 {
     bool sceneQueued = false;
 
-    void Update()
+    public void OnButtonClick()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !sceneQueued)
+        if (!sceneQueued)
         {
             sceneQueued = true;
-            Invoke(nameof(LoadScene), 2.5f);
+            Invoke(nameof(LoadScene), 10f);
         }
     }
 
