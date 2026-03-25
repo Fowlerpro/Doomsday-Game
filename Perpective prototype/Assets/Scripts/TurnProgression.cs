@@ -108,7 +108,7 @@ public class TurnProgression : MonoBehaviour
             firstrun =false;
         }
         */
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && false)
         {
             
             //StartCoroutine
@@ -119,7 +119,7 @@ public class TurnProgression : MonoBehaviour
                 turnover = false;
                 StartCoroutine(WaitLike5Seconds());
 
-                TurnEnd(true);
+                TurnEnd();
 
             }
         }
@@ -148,7 +148,7 @@ public class TurnProgression : MonoBehaviour
         }
         return EventNumber;
     }
-    void TurnEnd(bool sceneEnd) // this runs when the turn ends
+    public void TurnEnd() // this runs when the turn ends
     {
         if (sceneEnd)
         {
