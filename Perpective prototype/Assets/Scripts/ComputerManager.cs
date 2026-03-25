@@ -14,7 +14,7 @@ public class ComputerManager : MonoBehaviour
     public GameObject ButtonCanvas;
     public float fadeDuration = 0.5f;
     float delay;
-    float buttonTimer = 2f;
+    float buttonTimer = 3f;
     public float anchorDelay = 2.0f;
     public VideoClip loadingClip;
     public VideoPlayer player;
@@ -23,33 +23,38 @@ public class ComputerManager : MonoBehaviour
     {
         player.loopPointReached += OnVideoFinished;
     }
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-            if (!inputLocked)
-            {
-                LoadingCanvas.SetActive(true);
-                inputLocked = true;
-                delay = anchorDelay;
-                Screen.SetActive(false);
-                Cursor.SetActive(true);
-                ColorTransparency(1f);
-                PlayVideo(loadingClip);
-                StartCoroutine(FadeAfterDelay());
-                StartCoroutine(SpawnButton());
-            }
-            }
+        if (Input.GetMouseButton(1))
+        {
+            StopLock();
         }
     }
-    void StopLock()
+    public void ComputerTurnOn ()
+    {
+        if (!inputLocked)
+        {
+            LoadingCanvas.SetActive(true);
+            inputLocked = true;
+            delay = anchorDelay;
+            Screen.SetActive(false);
+            Cursor.SetActive(true);
+            ButtonCanvas.SetActive(true);
+            ColorTransparency(1f);
+            PlayVideo(loadingClip);
+            StartCoroutine(FadeAfterDelay());
+            StartCoroutine(SpawnButton());
+        }
+    }
+
+     void StopLock()
     {
         player.Stop();
         Screen.SetActive(true);
         Cursor.SetActive(false);
         ButtonCanvas.SetActive(false);
         inputLocked = false;
-        spaceBarPressed = false;
-        phonePressed = false;
+
 
     }
     IEnumerator FadeAfterDelay()
@@ -88,7 +93,7 @@ public class ComputerManager : MonoBehaviour
     {
         yield return new WaitForSeconds(buttonTimer);
         LoadingCanvas.SetActive(false);
-        ButtonCanvas.SetActive(true);
+
             
         
         
