@@ -30,7 +30,14 @@ public class SliderScript : MonoBehaviour
     {
         
     }
-
+    public void ResetTurn()
+    {
+        for (int i = 0; i < slidernums.Length; i++)
+        {
+            slidernums[i] = 0;
+            UpdateSlider(i);
+        }
+    }
     public void AddPayment(int EventNum)
     {
         //string EventName = ObjectList[EventNum].GetComponentInChildren<TextMeshProUGUI>().text;

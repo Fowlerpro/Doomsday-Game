@@ -29,7 +29,10 @@ public class TurnProgression : MonoBehaviour
     private EventUI UiEvents;
     bool firstrun = true;
     public GameObject MoneySlider;
+    public GameObject RepSlider;
+    public GameObject EnergySlider;
     public bool turnover = true;
+    private SliderScript ValueSlider;
     void Start()
     {
         randomEvents.ImportEvents(); // imports the basic info about events
@@ -37,6 +40,7 @@ public class TurnProgression : MonoBehaviour
         AddEvent(true);
         AddEvent(false);
         MoneyChange(8);
+        ValueSlider = this.GetComponent<SliderScript>();
     }
     public bool MoneyChange(int Change)
     {
@@ -52,6 +56,48 @@ public class TurnProgression : MonoBehaviour
         }
         
     }
+    public void EnergyChange(int Change)
+    {
+        if (energy + Change >= 0)
+        {
+            if (energy + Change <= 8)
+            {
+                energy += Change;
+                
+            }
+            else
+            {
+                energy = 8;
+            }
+        }
+        else
+        {
+            energy = 0;
+        }
+        EnergySlider.GetComponent<Slider>().value = energy;
+    }
+    public void RepChange(int Change)
+    {
+        if (rep + Change >= 0 )
+        {
+            if (rep + Change <= 8)
+            {
+                rep += Change;
+                RepSlider.GetComponent<Slider>().value = rep;
+            }
+            else
+            {
+                rep = 8;
+            }
+        }
+        else
+        {
+            rep = 0;
+        }
+        RepSlider.GetComponent<Slider>().value = rep;
+
+    }
+
     private void FixedUpdate()
     {
         /*
@@ -62,7 +108,7 @@ public class TurnProgression : MonoBehaviour
             firstrun =false;
         }
         */
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && false)
         {
             
             //StartCoroutine
@@ -73,7 +119,7 @@ public class TurnProgression : MonoBehaviour
                 turnover = false;
                 StartCoroutine(WaitLike5Seconds());
 
-                TurnEnd(true);
+                TurnEnd();
 
             }
         }
@@ -102,7 +148,7 @@ public class TurnProgression : MonoBehaviour
         }
         return EventNumber;
     }
-    void TurnEnd(bool sceneEnd) // this runs when the turn ends
+    public void TurnEnd() // this runs when the turn ends
     {
         if (sceneEnd)
         {
@@ -150,6 +196,8 @@ public class TurnProgression : MonoBehaviour
                 MoneyThisTurn = 8;
             }
             MoneyChange(MoneyThisTurn);
+            RepChange(culture);
+            EnergyChange(industry);
             bexlyMoney = 4;
             //Debug.Log("turn " + turnCounter);
 
@@ -169,7 +217,7 @@ public class TurnProgression : MonoBehaviour
             }
             // scene.load;
             sceneEnd = false;
-
+            ValueSlider.ResetTurn();
         }
 
     }
