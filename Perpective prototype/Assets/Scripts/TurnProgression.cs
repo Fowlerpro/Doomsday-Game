@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 public class TurnProgression : MonoBehaviour
 {
-    bool sceneEnd = false;
+    bool sceneEnd = true;
     public int polution = 0;
     
     public int culture; // rep
@@ -216,7 +216,7 @@ public class TurnProgression : MonoBehaviour
                 // game end
             }
             // scene.load;
-            sceneEnd = false;
+            sceneEnd = true;
             ValueSlider.ResetTurn();
         }
 
