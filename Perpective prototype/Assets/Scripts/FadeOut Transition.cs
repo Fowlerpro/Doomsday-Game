@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ScreenTransition : MonoBehaviour
+public class FadeOutTransition : MonoBehaviour
 {
     public RawImage transitionScreen;
     public GameObject transitionCanvas;
@@ -44,8 +44,8 @@ public class ScreenTransition : MonoBehaviour
 
         transitionCanvas.SetActive(true);
 
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("TitleScreen");
-        
+        yield return new WaitForSeconds(14f);
+
+        transitionCanvas.SetActive(false);
     }
 }

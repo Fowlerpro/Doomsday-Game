@@ -3,11 +3,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ScreenTransition : MonoBehaviour
+public class EnterTransition : MonoBehaviour
 {
     public RawImage transitionScreen;
     public GameObject transitionCanvas;
     public float fadeDuration = 20f;
+    private void Update()
+    {
+        Transition();
+    }
     public void Transition()
     {
         StartCoroutine(CanvasTimer());
@@ -16,9 +20,9 @@ public class ScreenTransition : MonoBehaviour
     IEnumerator FadeOutRoutine()
     {
 
-        ColorTransparency(0f);
+        ColorTransparency(1f);
 
-        yield return StartCoroutine(FadeScreen(0f, 1f, fadeDuration));
+        yield return StartCoroutine(FadeScreen(1f, 0f, fadeDuration));
 
     }
     IEnumerator FadeScreen(float from, float to, float duration)
@@ -41,11 +45,8 @@ public class ScreenTransition : MonoBehaviour
     }
     private IEnumerator CanvasTimer()
     {
+        yield return new WaitForSeconds(4f);
+        transitionCanvas.SetActive(false);
 
-        transitionCanvas.SetActive(true);
-
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("TitleScreen");
-        
     }
 }
