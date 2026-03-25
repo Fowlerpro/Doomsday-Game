@@ -8,7 +8,6 @@ using UnityEngine.Video;
 public class ComputerManager : MonoBehaviour
 {
     public GameObject Screen;
-    public GameObject Cursor;
     public RawImage Loading;
     public GameObject LoadingCanvas;
     public GameObject ButtonCanvas;
@@ -38,7 +37,6 @@ public class ComputerManager : MonoBehaviour
             inputLocked = true;
             delay = anchorDelay;
             Screen.SetActive(false);
-            Cursor.SetActive(true);
             ButtonCanvas.SetActive(true);
             ColorTransparency(1f);
             PlayVideo(loadingClip);
@@ -51,7 +49,6 @@ public class ComputerManager : MonoBehaviour
     {
         player.Stop();
         Screen.SetActive(true);
-        Cursor.SetActive(false);
         ButtonCanvas.SetActive(false);
         inputLocked = false;
 
