@@ -5,12 +5,13 @@ using System.Collections;
 public class EndDayAnim : MonoBehaviour
 {
     public TextMeshProUGUI Text;
+    public TextMeshProUGUI Text2;
     private Animator PrinterAnim;
     private int month = 1;
 
     [Header("Canvas Control")]
     public GameObject buttonCanvas;
-    public float disableTime = 10f;
+    public float disableTime = 15f;
 
     private bool isOnCooldown = false;
 
@@ -21,6 +22,7 @@ public class EndDayAnim : MonoBehaviour
     private void Update()
     {
         Text.text = "Month " + month.ToString();
+        Text2.text = "Month " + month.ToString();
     }
     public void OnButtonClick()
     {
