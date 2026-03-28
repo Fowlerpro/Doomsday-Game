@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class WeatherSystem : MonoBehaviour
@@ -6,10 +7,34 @@ public class WeatherSystem : MonoBehaviour
     public GameObject[] thunderstormObjects;
     public GameObject[] rainObjects;
 
+    [Header("Settings")]
+    public float delayBeforeWeather = 10f;
+
     private int currentWeatherNumber;
+    private Coroutine weatherRoutine;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ForceThunderstorm();
+        }
+    }
 
     public void MotherNatureClick()
     {
+        if (weatherRoutine != null)
+        {
+            StopCoroutine(weatherRoutine);
+        }
+
+        weatherRoutine = StartCoroutine(WeatherDelay());
+    }
+
+    IEnumerator WeatherDelay()
+    {
+        yield return new WaitForSeconds(delayBeforeWeather);
+
         currentWeatherNumber = Random.Range(1, 11);
 
         Debug.Log("Weather rolled: " + currentWeatherNumber);
@@ -45,5 +70,20 @@ public class WeatherSystem : MonoBehaviour
         {
             obj.SetActive(true);
         }
+    }
+
+    void ForceThunderstorm()
+    {
+        if (weatherRoutine != null)
+        {
+            StopCoroutine(weatherRoutine);
+        }
+
+        currentWeatherNumber = 1;
+
+        DisableAllWeather();
+        ActivateObjects(thunderstormObjects);
+
+        Debug.Log("Forced Thunderstorm");
     }
 }
