@@ -31549,16 +31549,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EasterEgg
   videoPlayer: {fileID: 939564256}
   screenObject: {fileID: 185996291}
-  secretCode1: 676921
-  secretCode2: 91021
-  secretCode3: 91215
-  secretCode4: 789456
-  secretCode5: 
+  secretCode1: 67
+  secretCode2: 69
+  secretCode3: 21
+  secretCode4: 420
+  secretCode5: 3
   videoClip1: {fileID: 32900000, guid: bd05c45d415c14743b8759af283365f3, type: 3}
   videoClip2: {fileID: 32900000, guid: b33e84a20f30ac84ca4452b9e4a3c2ff, type: 3}
   videoClip3: {fileID: 32900000, guid: 0f118a239ef2dc44689885e4f3f63d8a, type: 3}
   videoClip4: {fileID: 0}
-  videoClip5: {fileID: 0}
+  videoClip5: {fileID: 32900000, guid: 2251698ebb7fe6f46a6b26955d969f8b, type: 3}
 --- !u!1001 &939915451
 PrefabInstance:
   m_ObjectHideFlags: 0
