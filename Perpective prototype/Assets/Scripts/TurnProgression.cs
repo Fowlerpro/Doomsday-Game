@@ -33,8 +33,37 @@ public class TurnProgression : MonoBehaviour
     public GameObject EnergySlider;
     public bool turnover = true;
     private SliderScript ValueSlider;
+
+    private EventData MajorEventonHold;
+
+    public List<EventData> EndingEvents = new List<EventData>(1);
+    
+
+
+
+
+    [Header("states")] // i stg theres a better way to link these but i can't find it im sorry :(
+    private GameObject currentState;
+
+    public GameObject defaultState;
+    public GameObject pandemicState;
+    public GameObject foreignState;
+    public GameObject powerOutageState;
+    public GameObject tornadoState;
+
+    [Header("map 2")]
+    private GameObject currentState2;
+
+    public GameObject defaultState2;
+    public GameObject tornadoState2;
+    public GameObject invasionState2;
+    public GameObject communintyCenter2;
+    public GameObject commCenter2;
+
     void Start()
     {
+        currentState = defaultState;
+        currentState2 = defaultState2;
         randomEvents.ImportEvents(); // imports the basic info about events
         UiEvents = this.GetComponent<EventUI>();
         AddEvent(true);
@@ -181,10 +210,16 @@ public class TurnProgression : MonoBehaviour
                 }
                 counter++;
             }
+            int counter2 = 0; // this is bad but it works
             foreach(int count in eventRemove)
             {
-                CurrentEvents.RemoveAt(count);
-                UiEvents.removeEvent(count);
+
+                Debug.Log(count- counter2);
+                EndingEvents.Add(CurrentEvents[count - counter2]);
+                CurrentEvents.RemoveAt(count - counter2);
+                UiEvents.removeEvent(count - counter2);
+                counter2++;
+                
             }
             UiEvents.UpdateEventTurnCounter();
             
@@ -202,6 +237,23 @@ public class TurnProgression : MonoBehaviour
             //Debug.Log("turn " + turnCounter);
 
             //AddEvent(true); // todo, adjust, it shouldn't add a new major event every time
+            // Check If Disaster Event is needed.
+            if (trade <= 0)
+            {
+                
+            }
+            else if (rep <= 0)
+            {
+
+            }
+            else if (energy <= 0)
+            {
+                randomEvents.GetDisasterEvent(randomEvents.powerOut);
+            }
+
+
+
+
             if (addMajor)
             {
                 AddEvent(true);
@@ -215,11 +267,88 @@ public class TurnProgression : MonoBehaviour
             {
                 // game end
             }
+            StateCheck(CurrentEvents[0]);
             // scene.load;
             sceneEnd = true;
             ValueSlider.ResetTurn();
         }
 
+    }
+
+
+    void StateCheck(EventData majorEvent)
+    {
+        switch (majorEvent.name)
+        {
+            case "Pandemic":
+                currentState.SetActive(false);
+                currentState = pandemicState;
+                currentState.SetActive(true);
+
+                currentState2.SetActive(false);
+                currentState2 = defaultState2;
+                currentState2.SetActive(true);
+                break;
+
+            case "Foreign Invasion":
+                currentState.SetActive(false);
+                currentState = foreignState;
+                currentState.SetActive(true);
+                
+                currentState2.SetActive(false);
+                currentState2 = invasionState2;
+                currentState2.SetActive(true);
+                break;
+            case "City wide Power Outage":
+                currentState.SetActive(false);
+                currentState = powerOutageState;
+                currentState.SetActive(true);
+
+                currentState2.SetActive(false);
+                currentState2 = defaultState2;
+                currentState2.SetActive(true);
+                break;
+            case "Reactor meltdown":
+                currentState.SetActive(false);
+                currentState = defaultState;
+                currentState.SetActive(true);
+
+                currentState2.SetActive(false);
+                currentState2 = defaultState2;
+                currentState2.SetActive(true);
+                break;
+            case "Tornado":
+                currentState.SetActive(false);
+                currentState = tornadoState;
+                currentState.SetActive(true);
+
+                currentState2.SetActive(false);
+                currentState2 = tornadoState2;
+                currentState2.SetActive(true);
+                break;
+
+            case "Residential neighbourhood displaced":
+
+                currentState.SetActive(false);
+                currentState = defaultState;
+                currentState.SetActive(true);
+
+                currentState2.SetActive(false);
+                currentState2 = commCenter2; // add post state
+                currentState2.SetActive(true);
+                break;
+
+            default:
+                currentState.SetActive(false);
+                currentState = defaultState;
+                currentState.SetActive(true);
+
+                currentState2.SetActive(false);
+                currentState2 = defaultState2;
+                currentState2.SetActive(true);
+                break;
+
+        }
     }
     
 }

@@ -28,6 +28,22 @@ public class EventData
         paid = 0;
         //Debug.Log("PLEASE WORK PLEASEE");
     }
+
+    public string InitialSplash()
+    {
+        return this.text;
+    }
+    public string EndingSplash()
+    {
+        if (Completed)
+        {
+            return splash1;
+        }
+        else
+        {
+            return splash2;
+        }
+    }
     public void EventInitialize(string threat, string splash1, string splash2, int[] resources1, int[] resources2, int[] extra1, int[] extra2, int deadline, int cost, string runover, string prereq1, string prereq2)/* bool chosen,int timeCost*/
     {
         //threat, splash1, splash2, res1, res2, rext1, rext2, time, cost, runover, prereq1, prereq2
@@ -43,9 +59,9 @@ public class EventData
         this.deadline = deadline;
         this.cost = cost;
         this.isSoOver = (runover == "1");
-
+        paid = 0;
         //this.secondaryEvent = secondaryEvent; // implement later im tired.
-
+        Completed = false;
         turnsLeft = deadline;
         //Debug.Log("SAVE MY SOUL");
         
