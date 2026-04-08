@@ -15,7 +15,7 @@ public class RandomEvents : MonoBehaviour
     public List<EventData> MajorEventList = new List<EventData>(1);
     public EventData powerOut;
     public EventData repOut;
-    public EventData moneyOut;
+    //public EventData moneyOut;
     private string SheetPath = "Assets/Scripts/EventMasterList.txt";
     private string Delimiter = "	"; // im tired
     public void setupEvents()
@@ -27,7 +27,7 @@ public class RandomEvents : MonoBehaviour
     }
     
 
-    public void GetDisasterEvent(EventData currentDisEvent) // 1 is power out 2 is rep 3 is broke
+    public EventData GetDisasterEvent(EventData currentDisEvent) // 1 is power out 2 is rep 3 is broke
     {
         using StreamReader reader = new(SheetPath); // todo mupdate path
         string line1;
@@ -61,6 +61,7 @@ public class RandomEvents : MonoBehaviour
                 currentDisEvent.EventInitialize(fullLine[3], fullLine[4], fullLine2[4], Res1, Res2, ResExt1, ResExt2, int.Parse(fullLine[10]), int.Parse(fullLine[11]), fullLine2[12], fullLine[13], fullLine2[13]);
             }
         }
+        return currentDisEvent;
 
     } 
 
@@ -157,20 +158,24 @@ public class RandomEvents : MonoBehaviour
             // name, major, threat, splash1, splash2, res1, res2, cost, time
             // 1     2      3       4        5        6     7     8     9
             //tempEvent = ;
-
+            //Debug.Log(line1);
             if (fullLine[2] == "City wide Power Outage")
             {
                 powerOut = new EventData(fullLine[2], true);
             }
-            if (fullLine[1] == "major")
+            else if (fullLine[2] == "Local protests")
             {
-               
-                MajorEventList.Add (new EventData(fullLine[2], true));
+                repOut = new EventData(fullLine[2], true);
+            }
+            else if (fullLine[1] == "major")
+            {
+
+                MajorEventList.Add(new EventData(fullLine[2], true));
                 //Debug.Log(MajorEventList[MajorEventList.Count-1].name);
             }
             else
             {
-                eventList.Add (new EventData(fullLine[2], false));
+                eventList.Add(new EventData(fullLine[2], false));
             }
 
             //Debug.Log("event added");
