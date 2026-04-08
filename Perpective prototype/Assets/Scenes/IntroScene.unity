@@ -10113,9 +10113,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CutscenePlayer
   videoPlayer: {fileID: 939564256}
   videoClips:
-  - {fileID: 32900000, guid: 0f118a239ef2dc44689885e4f3f63d8a, type: 3}
-  - {fileID: 32900000, guid: bd05c45d415c14743b8759af283365f3, type: 3}
-  - {fileID: 32900000, guid: b33e84a20f30ac84ca4452b9e4a3c2ff, type: 3}
+  - {fileID: 32900000, guid: eb21f2a65c46f5a4fb3c4bd145e9c62e, type: 3}
+  - {fileID: 32900000, guid: c51dbef433793ac49b5bb293c915fbd0, type: 3}
+  - {fileID: 32900000, guid: 3143e0a6f3bd9984eadcad28c6b4fa1b, type: 3}
+  - {fileID: 32900000, guid: 48ea7f4581a744a4aa55167f8088c047, type: 3}
+  - {fileID: 32900000, guid: 773a03468c480c54bac94e2641b2bc3c, type: 3}
+  - {fileID: 32900000, guid: 28b1a932713b7534c8014ca7f0491138, type: 3}
+  - {fileID: 32900000, guid: 0493f198398916841a03855708f5731d, type: 3}
 --- !u!4 &950199389 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3a705fc8b1e3d084c80ec02e914dac0f, type: 3}
