@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -33,6 +34,8 @@ public class TurnProgression : MonoBehaviour
     public GameObject EnergySlider;
     public bool turnover = true;
     private SliderScript ValueSlider;
+
+    private bool isDisaster = false;
 
     private EventData MajorEventonHold;
 
@@ -70,6 +73,8 @@ public class TurnProgression : MonoBehaviour
         AddEvent(false);
         MoneyChange(8);
         ValueSlider = this.GetComponent<SliderScript>();
+        EnergyChange(4);
+        RepChange(4);
     }
     public bool MoneyChange(int Change)
     {
@@ -162,7 +167,13 @@ public class TurnProgression : MonoBehaviour
     private void AddEvent(bool IsMajor)
     {
         CurrentEvents.Add(randomEvents.GetRandomEvent(IsMajor));
-        UiEvents.addEvent(CurrentEvents[CurrentEvents.Count - 1].name, CurrentEvents[CurrentEvents.Count-1].turnsLeft);
+        UiEvents.addEvent(CurrentEvents[CurrentEvents.Count - 1].name, CurrentEvents[CurrentEvents.Count-1].turnsLeft); // this is reallly poorly formatted and frankly wont work
+    }
+
+    private void addDisaster(EventData DisasterEvent)
+    {
+        CurrentEvents.Add(DisasterEvent);
+        UiEvents.addEvent(CurrentEvents[CurrentEvents.Count - 1].name, CurrentEvents[CurrentEvents.Count - 1].turnsLeft);
     }
 
     public int FindEvent(string eventName)
@@ -192,6 +203,7 @@ public class TurnProgression : MonoBehaviour
                 currentEvent.PayCost();
                 if (currentEvent.CheckEventDone())
                 {
+                    Debug.Log("event Remove ran " + counter);
                     int[] resourcesAffected = currentEvent.EventChoice(true);
                     int[] extraResAffected = currentEvent.EventChoice(false);
                     //CurrentEvents.Remove(currentEvent);
@@ -207,15 +219,18 @@ public class TurnProgression : MonoBehaviour
                     polution += extraResAffected[1];
                     //CurrentEvents.Remove(currentEvent);
                     eventRemove.Add(counter);
+                    EndingEvents.Add(currentEvent);
                 }
                 counter++;
             }
             int counter2 = 0; // this is bad but it works
+            UiEvents.UpdateEvents(EndingEvents);
+            //Debug.Log(EndingEvents.Count);
             foreach(int count in eventRemove)
             {
 
                 Debug.Log(count- counter2);
-                EndingEvents.Add(CurrentEvents[count - counter2]);
+                //EndingEvents.Add(CurrentEvents[count - counter2]);
                 CurrentEvents.RemoveAt(count - counter2);
                 UiEvents.removeEvent(count - counter2);
                 counter2++;
@@ -238,18 +253,35 @@ public class TurnProgression : MonoBehaviour
 
             //AddEvent(true); // todo, adjust, it shouldn't add a new major event every time
             // Check If Disaster Event is needed.
-            if (trade <= 0)
+
+            if (!isDisaster)
             {
+                if (rep <= 0)
+                {
+                    if (CurrentEvents[0] != null)
+                    {
+                        MajorEventonHold = CurrentEvents[0];
+                    }
+                    CurrentEvents.RemoveAt(0);
+                    addDisaster(randomEvents.GetDisasterEvent(randomEvents.repOut));
+                    addMajor = false;
+                    isDisaster = true;
+
+                }
+                else if (energy <= 0)
+                {
+                    if (CurrentEvents[0] != null)
+                    {
+                        MajorEventonHold = CurrentEvents[0];
+                    }
+                    CurrentEvents.RemoveAt(0);
+                    addDisaster(randomEvents.GetDisasterEvent(randomEvents.powerOut));
+                    addMajor = false;
+                    isDisaster = true;
+                }
                 
             }
-            else if (rep <= 0)
-            {
-
-            }
-            else if (energy <= 0)
-            {
-                randomEvents.GetDisasterEvent(randomEvents.powerOut);
-            }
+            
 
 
 

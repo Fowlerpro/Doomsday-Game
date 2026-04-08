@@ -3,6 +3,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class EventUI : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class EventUI : MonoBehaviour
     public GameObject minorEvent2;
     public GameObject[] ObjectList = new GameObject[3];
     private TurnProgression turnProgress;
+
+    public TextMeshProUGUI majorEventtxt;
+    public TextMeshProUGUI minorEvent1txt;
+    public TextMeshProUGUI minorEvent2txt;
+
     void Start()
     {
         turnProgress = this.GetComponent<TurnProgression>();
@@ -85,6 +91,7 @@ public class EventUI : MonoBehaviour
                 eventPart.GetComponentsInChildren<TextMeshProUGUI>(true)[1].text = "Turns Left: \n" + turnsLeft;
             }
         }
+
     }
     
     public void addEvent(string eventName, int turnsTotal)
@@ -118,5 +125,48 @@ public class EventUI : MonoBehaviour
     {
         ObjectList[eventnumber].SetActive(false);
     }
-    
+
+
+
+
+
+    // endscreen
+
+    public void UpdateEvents(List<EventData> tempList)
+    {
+        
+        // so the problem is 1, this doesn't diffferentiate between the diffrent events
+        majorEventtxt.text = "";
+        minorEvent1txt.text = "";
+        minorEvent2txt.text = "";
+        string textToBe = "";
+
+        // add resources effected
+
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            Debug.Log("textadded");
+            /*
+            if (i == 0)
+            {
+                majorEventtxt.text = tempList[0].EndingSplash();
+            }
+            else if (i == 1)
+            {
+                minorEvent1txt.text = tempList[1].EndingSplash();
+            }
+            else if (i == 2)
+            {
+                minorEvent2txt.text = tempList[2].EndingSplash();
+            }*/
+            
+            textToBe += tempList[i].EndingSplash();
+            textToBe += "\n \n";
+            //minorEvent2txt.text = tempList[1].text;
+
+        }
+        //majorEventtxt.fontSize = (int)(textToBe.Length/12); // variable with this with the size
+        majorEventtxt.text = textToBe;
+    }
+
 }
