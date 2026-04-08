@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,9 +8,15 @@ public class TitleScreen : MonoBehaviour
 
     public void GoToNextScene()
     {
-        SceneManager.LoadScene(2);
+        StartCoroutine(SceneTimer());
+        
     }
+    private IEnumerator SceneTimer()
+    {
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene(1);
 
+    }
     public void ToggleOverlayOn()
     {
         if (InfoScreen != null)
