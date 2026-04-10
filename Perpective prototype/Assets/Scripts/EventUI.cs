@@ -134,9 +134,16 @@ public class EventUI : MonoBehaviour
         UpdateSlider(eventNumber, actualNum);
         */
     }
-    public void removeEvent(int eventnumber)
+    public void removeEvent(EventData toRemoveEvent)
     {
-        ObjectList[eventnumber].SetActive(false);
+        //ObjectList[eventnumber].SetActive(false);
+        foreach(GameObject currObject in ObjectList)
+        {
+            if (currObject.GetComponentInChildren<TextMeshProUGUI>().text == toRemoveEvent.name)
+            {
+                currObject.SetActive(false);
+            }
+        }
         //Debug.Log(eventnumber);
     }
 

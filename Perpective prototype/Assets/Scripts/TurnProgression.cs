@@ -63,10 +63,19 @@ public class TurnProgression : MonoBehaviour
     public GameObject communintyCenter2;
     public GameObject commCenter2;
 
+    [Header("Skyline")]
+    private GameObject currentStateSky;
+
+    public GameObject defaultStateSky;
+    public GameObject invasionStateSky;
+    public GameObject pandemicStateSky;
+    public GameObject powerOutSky;
+    public GameObject reactorStateSky;
     void Start()
     {
         currentState = defaultState;
         currentState2 = defaultState2;
+        currentStateSky = defaultStateSky;
         randomEvents.ImportEvents(); // imports the basic info about events
         UiEvents = this.GetComponent<EventUI>();
         AddEvent(true);
@@ -142,11 +151,16 @@ public class TurnProgression : MonoBehaviour
             firstrun =false;
         }
         */
-        if (!firstrun)
+        if (firstrun)
         {
+            //WaitLikeSomeSeconds(1);
             for (int i = 0; i < CurrentEvents.Count; i++)
             {
                 UiEvents.addEventDescriptions(CurrentEvents[i].name, CurrentEvents[i].InitialSplash());
+                if (CurrentEvents[i].isMajor)
+                {
+                    StateCheck(CurrentEvents[i]);
+                }
             }
             firstrun = false;
         }
@@ -159,7 +173,7 @@ public class TurnProgression : MonoBehaviour
             {
                 //Debug.Log("test2");
                 turnover = false;
-                StartCoroutine(WaitLike5Seconds());
+                StartCoroutine(WaitLikeSomeSeconds(7));
 
                 TurnEnd();
 
@@ -167,9 +181,9 @@ public class TurnProgression : MonoBehaviour
         }
     }
 
-    IEnumerator WaitLike5Seconds()
+    IEnumerator WaitLikeSomeSeconds(int seconds)
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(seconds);
         turnover = true;
     }
     private void AddEvent(bool IsMajor)
@@ -234,13 +248,13 @@ public class TurnProgression : MonoBehaviour
             int counter2 = 0; // this is bad but it works
             UiEvents.UpdateEvents(EndingEvents);
             //Debug.Log(EndingEvents.Count);
-            foreach(int count in eventRemove)
+            foreach(EventData toRemoveEvent in EndingEvents)
             {
 
                 //Debug.Log(count- counter2);
                 //EndingEvents.Add(CurrentEvents[count - counter2]);
-                CurrentEvents.RemoveAt(count - counter2);
-                UiEvents.removeEvent(count);
+                CurrentEvents.Remove(toRemoveEvent);
+                UiEvents.removeEvent(toRemoveEvent);
                 counter2++;
                 
             }
@@ -308,7 +322,14 @@ public class TurnProgression : MonoBehaviour
             {
                 // game end
             }
-            StateCheck(CurrentEvents[0]);
+            foreach(EventData thisEvent in CurrentEvents)
+            {
+                if (thisEvent.isMajor)
+                {
+                    StateCheck(thisEvent);
+                }
+            }
+            
             // scene.load;
             sceneEnd = true;
             ValueSlider.ResetTurn();
@@ -324,6 +345,7 @@ public class TurnProgression : MonoBehaviour
 
     void StateCheck(EventData majorEvent)
     {
+        //Debug.Log(majorEvent.name);
         switch (majorEvent.name)
         {
             case "Pandemic":
@@ -334,6 +356,10 @@ public class TurnProgression : MonoBehaviour
                 currentState2.SetActive(false);
                 currentState2 = defaultState2;
                 currentState2.SetActive(true);
+
+                currentStateSky.SetActive(false);
+                currentStateSky = pandemicStateSky;
+                currentStateSky.SetActive(true);
                 break;
 
             case "Foreign Invasion":
@@ -344,6 +370,10 @@ public class TurnProgression : MonoBehaviour
                 currentState2.SetActive(false);
                 currentState2 = invasionState2;
                 currentState2.SetActive(true);
+
+                currentStateSky.SetActive(false);
+                currentStateSky = invasionStateSky;
+                currentStateSky.SetActive(true);
                 break;
             case "City wide Power Outage":
                 currentState.SetActive(false);
@@ -353,6 +383,10 @@ public class TurnProgression : MonoBehaviour
                 currentState2.SetActive(false);
                 currentState2 = defaultState2;
                 currentState2.SetActive(true);
+
+                currentStateSky.SetActive(false);
+                currentStateSky = powerOutSky;
+                currentStateSky.SetActive(true);
                 break;
             case "Reactor meltdown":
                 currentState.SetActive(false);
@@ -362,6 +396,10 @@ public class TurnProgression : MonoBehaviour
                 currentState2.SetActive(false);
                 currentState2 = defaultState2;
                 currentState2.SetActive(true);
+
+                currentStateSky.SetActive(false);
+                currentStateSky = reactorStateSky;
+                currentStateSky.SetActive(true);
                 break;
             case "Tornado":
                 currentState.SetActive(false);
@@ -371,6 +409,10 @@ public class TurnProgression : MonoBehaviour
                 currentState2.SetActive(false);
                 currentState2 = tornadoState2;
                 currentState2.SetActive(true);
+
+                currentStateSky.SetActive(false);
+                currentStateSky = defaultStateSky;
+                currentStateSky.SetActive(true);
                 break;
 
             case "Residential neighbourhood displaced":
@@ -382,6 +424,10 @@ public class TurnProgression : MonoBehaviour
                 currentState2.SetActive(false);
                 currentState2 = commCenter2; // add post state
                 currentState2.SetActive(true);
+
+                currentStateSky.SetActive(false);
+                currentStateSky = defaultStateSky;
+                currentStateSky.SetActive(true);
                 break;
 
             default:
@@ -392,6 +438,10 @@ public class TurnProgression : MonoBehaviour
                 currentState2.SetActive(false);
                 currentState2 = defaultState2;
                 currentState2.SetActive(true);
+
+                currentStateSky.SetActive(false);
+                currentStateSky = defaultStateSky;
+                currentStateSky.SetActive(true);
                 break;
 
         }

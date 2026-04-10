@@ -39930,6 +39930,11 @@ MonoBehaviour:
   invasionState2: {fileID: 560842271}
   communintyCenter2: {fileID: 1497122115}
   commCenter2: {fileID: 1133762275}
+  defaultStateSky: {fileID: 1661551748}
+  invasionStateSky: {fileID: 1508660072}
+  pandemicStateSky: {fileID: 1202025395}
+  powerOutSky: {fileID: 7290372}
+  reactorStateSky: {fileID: 696773898}
 --- !u!114 &1090600140
 MonoBehaviour:
   m_ObjectHideFlags: 0
