@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 public class EventUI : MonoBehaviour
 {
@@ -12,11 +13,16 @@ public class EventUI : MonoBehaviour
     public GameObject minorEvent1;
     public GameObject minorEvent2;
     public GameObject[] ObjectList = new GameObject[3];
+
     private TurnProgression turnProgress;
 
     public TextMeshProUGUI majorEventtxt;
     public TextMeshProUGUI minorEvent1txt;
     public TextMeshProUGUI minorEvent2txt;
+
+    public TextMeshProUGUI majorEventtxtExt;
+    public TextMeshProUGUI minorEvent1txtExt;
+    public TextMeshProUGUI minorEvent2txtExt;
 
     void Start()
     {
@@ -24,6 +30,7 @@ public class EventUI : MonoBehaviour
         ObjectList[0] = majorEvent;
         ObjectList[1] = minorEvent1;
         ObjectList[2] = minorEvent2;
+
         majorEvent.SetActive(false);
         minorEvent1.SetActive(false);
         minorEvent2.SetActive(false);
@@ -85,7 +92,7 @@ public class EventUI : MonoBehaviour
             if (eventPart.activeSelf)
             {
                 string eventText = eventPart.GetComponentsInChildren<TextMeshProUGUI>(true)[1].text;
-                int turnsLeft = int.Parse(eventText.Substring(13));
+                int turnsLeft = int.Parse(eventText.Substring(13)); // what was this about
                 turnsLeft--;
                 //Debug.Log(turnsLeft);
                 eventPart.GetComponentsInChildren<TextMeshProUGUI>(true)[1].text = "Turns Left: \n" + turnsLeft;
@@ -106,6 +113,10 @@ public class EventUI : MonoBehaviour
                 {
                     ObjectList[i].SetActive(true);
                     eventNumber = i;
+                    ObjectList[eventNumber].GetComponentsInChildren<TextMeshProUGUI>(true)[0].text = eventName;
+                    ObjectList[eventNumber].GetComponentsInChildren<TextMeshProUGUI>(true)[1].text = "Turns Left: \n" + turnsTotal;
+                    int actualNum = turnProgress.FindEvent(eventName);
+                    UpdateSlider(eventNumber, actualNum);
                 }
             }
             
@@ -116,19 +127,37 @@ public class EventUI : MonoBehaviour
         //Debug.Log(eventName)
 
         //GameObject textmesh = ObjectList[eventNumber].GetComponentInChildren<TextMesh>(true);
+        /*
         ObjectList[eventNumber].GetComponentsInChildren<TextMeshProUGUI>(true)[0].text = eventName;
         ObjectList[eventNumber].GetComponentsInChildren<TextMeshProUGUI>(true)[1].text = "Turns Left: \n"+turnsTotal;
         int actualNum = turnProgress.FindEvent(eventName);
         UpdateSlider(eventNumber, actualNum);
+        */
     }
     public void removeEvent(int eventnumber)
     {
         ObjectList[eventnumber].SetActive(false);
+        //Debug.Log(eventnumber);
     }
 
 
 
-
+    public void addEventDescriptions(string EventName, string EventDesc)
+    {
+        if (EventName == ObjectList[0].GetComponentInChildren<TextMeshProUGUI>().text)
+        {
+            majorEventtxtExt.text = EventDesc;
+        }
+        else if (EventName == ObjectList[1].GetComponentInChildren<TextMeshProUGUI>().text)
+        {
+            minorEvent1txtExt.text = EventDesc;
+        }
+        else if (EventName == ObjectList[2].GetComponentInChildren<TextMeshProUGUI>().text)
+        {
+            minorEvent2txtExt.text = EventDesc;
+        }
+        
+    }
 
     // endscreen
 
@@ -145,7 +174,7 @@ public class EventUI : MonoBehaviour
 
         for (int i = 0; i < tempList.Count; i++)
         {
-            Debug.Log("textadded");
+            //Debug.Log("textadded");
             /*
             if (i == 0)
             {

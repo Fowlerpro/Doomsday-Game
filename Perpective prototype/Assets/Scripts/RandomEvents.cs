@@ -100,7 +100,8 @@ public class RandomEvents : MonoBehaviour
 
                 string[] fullLine2 = line1.Split(Delimiter);
 
-
+                //Debug.Log(line1);
+                //Debug.Log(fullLine[1]);
                 int[] Res1 = { int.Parse(fullLine[5]), int.Parse(fullLine[6]), int.Parse(fullLine[7])};
                 int[] Res2 = { int.Parse(fullLine2[5]), int.Parse(fullLine2[6]), int.Parse(fullLine2[7])};
 

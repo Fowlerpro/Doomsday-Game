@@ -142,6 +142,14 @@ public class TurnProgression : MonoBehaviour
             firstrun =false;
         }
         */
+        if (!firstrun)
+        {
+            for (int i = 0; i < CurrentEvents.Count; i++)
+            {
+                UiEvents.addEventDescriptions(CurrentEvents[i].name, CurrentEvents[i].InitialSplash());
+            }
+            firstrun = false;
+        }
         if (Input.GetKeyDown(KeyCode.E) && false)
         {
             
@@ -203,7 +211,7 @@ public class TurnProgression : MonoBehaviour
                 currentEvent.PayCost();
                 if (currentEvent.CheckEventDone())
                 {
-                    Debug.Log("event Remove ran " + counter);
+                    //Debug.Log("event Remove ran " + counter);
                     int[] resourcesAffected = currentEvent.EventChoice(true);
                     int[] extraResAffected = currentEvent.EventChoice(false);
                     //CurrentEvents.Remove(currentEvent);
@@ -229,13 +237,14 @@ public class TurnProgression : MonoBehaviour
             foreach(int count in eventRemove)
             {
 
-                Debug.Log(count- counter2);
+                //Debug.Log(count- counter2);
                 //EndingEvents.Add(CurrentEvents[count - counter2]);
                 CurrentEvents.RemoveAt(count - counter2);
-                UiEvents.removeEvent(count - counter2);
+                UiEvents.removeEvent(count);
                 counter2++;
                 
             }
+            EndingEvents.Clear();
             UiEvents.UpdateEventTurnCounter();
             
             money = 0;
@@ -303,6 +312,11 @@ public class TurnProgression : MonoBehaviour
             // scene.load;
             sceneEnd = true;
             ValueSlider.ResetTurn();
+
+            for (int i = 0; i < CurrentEvents.Count; i++)
+            {
+                UiEvents.addEventDescriptions(CurrentEvents[i].name, CurrentEvents[i].InitialSplash());
+            }
         }
 
     }
