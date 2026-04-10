@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 
 public class Projector : MonoBehaviour
 {
@@ -16,7 +18,12 @@ public class Projector : MonoBehaviour
     [Header("Timing")]
     public float delayBeforeStart = 9f;
     public float delayAfterAnim = 1f;
-    public float activeDuration = 5f;
+    public float activeDuration = 7f;
+
+    [Header("TextMeshes")]
+    public TextMeshProUGUI mainEvent1;
+    public TextMeshProUGUI minorEvent1;
+    public TextMeshProUGUI minorEvent2;
 
     private bool isRunning = false;
 
@@ -56,4 +63,8 @@ public class Projector : MonoBehaviour
             obj.SetActive(state);
         }
     }
+
+
+
+    
 }

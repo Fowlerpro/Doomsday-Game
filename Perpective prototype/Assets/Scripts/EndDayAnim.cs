@@ -22,7 +22,11 @@ public class EndDayAnim : MonoBehaviour
     private void Update()
     {
         Text.text = "Month " + month.ToString();
-        Text2.text = "Month " + month.ToString();
+        if(Text2 != null)
+        {
+            Text2.text = "Month " + month.ToString();
+        }
+        
     }
     public void OnButtonClick()
     {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -33,14 +34,47 @@ public class TurnProgression : MonoBehaviour
     public GameObject EnergySlider;
     public bool turnover = true;
     private SliderScript ValueSlider;
+
+    private bool isDisaster = false;
+
+    private EventData MajorEventonHold;
+
+    public List<EventData> EndingEvents = new List<EventData>(1);
+    
+
+
+
+
+    [Header("states")] // i stg theres a better way to link these but i can't find it im sorry :(
+    private GameObject currentState;
+
+    public GameObject defaultState;
+    public GameObject pandemicState;
+    public GameObject foreignState;
+    public GameObject powerOutageState;
+    public GameObject tornadoState;
+
+    [Header("map 2")]
+    private GameObject currentState2;
+
+    public GameObject defaultState2;
+    public GameObject tornadoState2;
+    public GameObject invasionState2;
+    public GameObject communintyCenter2;
+    public GameObject commCenter2;
+
     void Start()
     {
+        currentState = defaultState;
+        currentState2 = defaultState2;
         randomEvents.ImportEvents(); // imports the basic info about events
         UiEvents = this.GetComponent<EventUI>();
         AddEvent(true);
         AddEvent(false);
         MoneyChange(8);
         ValueSlider = this.GetComponent<SliderScript>();
+        EnergyChange(4);
+        RepChange(4);
     }
     public bool MoneyChange(int Change)
     {
@@ -108,6 +142,14 @@ public class TurnProgression : MonoBehaviour
             firstrun =false;
         }
         */
+        if (!firstrun)
+        {
+            for (int i = 0; i < CurrentEvents.Count; i++)
+            {
+                UiEvents.addEventDescriptions(CurrentEvents[i].name, CurrentEvents[i].InitialSplash());
+            }
+            firstrun = false;
+        }
         if (Input.GetKeyDown(KeyCode.E) && false)
         {
             
@@ -133,7 +175,13 @@ public class TurnProgression : MonoBehaviour
     private void AddEvent(bool IsMajor)
     {
         CurrentEvents.Add(randomEvents.GetRandomEvent(IsMajor));
-        UiEvents.addEvent(CurrentEvents[CurrentEvents.Count - 1].name, CurrentEvents[CurrentEvents.Count-1].turnsLeft);
+        UiEvents.addEvent(CurrentEvents[CurrentEvents.Count - 1].name, CurrentEvents[CurrentEvents.Count-1].turnsLeft); // this is reallly poorly formatted and frankly wont work
+    }
+
+    private void addDisaster(EventData DisasterEvent)
+    {
+        CurrentEvents.Add(DisasterEvent);
+        UiEvents.addEvent(CurrentEvents[CurrentEvents.Count - 1].name, CurrentEvents[CurrentEvents.Count - 1].turnsLeft);
     }
 
     public int FindEvent(string eventName)
@@ -163,6 +211,7 @@ public class TurnProgression : MonoBehaviour
                 currentEvent.PayCost();
                 if (currentEvent.CheckEventDone())
                 {
+                    //Debug.Log("event Remove ran " + counter);
                     int[] resourcesAffected = currentEvent.EventChoice(true);
                     int[] extraResAffected = currentEvent.EventChoice(false);
                     //CurrentEvents.Remove(currentEvent);
@@ -178,14 +227,24 @@ public class TurnProgression : MonoBehaviour
                     polution += extraResAffected[1];
                     //CurrentEvents.Remove(currentEvent);
                     eventRemove.Add(counter);
+                    EndingEvents.Add(currentEvent);
                 }
                 counter++;
             }
+            int counter2 = 0; // this is bad but it works
+            UiEvents.UpdateEvents(EndingEvents);
+            //Debug.Log(EndingEvents.Count);
             foreach(int count in eventRemove)
             {
-                CurrentEvents.RemoveAt(count);
+
+                //Debug.Log(count- counter2);
+                //EndingEvents.Add(CurrentEvents[count - counter2]);
+                CurrentEvents.RemoveAt(count - counter2);
                 UiEvents.removeEvent(count);
+                counter2++;
+                
             }
+            EndingEvents.Clear();
             UiEvents.UpdateEventTurnCounter();
             
             money = 0;
@@ -202,6 +261,40 @@ public class TurnProgression : MonoBehaviour
             //Debug.Log("turn " + turnCounter);
 
             //AddEvent(true); // todo, adjust, it shouldn't add a new major event every time
+            // Check If Disaster Event is needed.
+
+            if (!isDisaster)
+            {
+                if (rep <= 0)
+                {
+                    if (CurrentEvents[0] != null)
+                    {
+                        MajorEventonHold = CurrentEvents[0];
+                    }
+                    CurrentEvents.RemoveAt(0);
+                    addDisaster(randomEvents.GetDisasterEvent(randomEvents.repOut));
+                    addMajor = false;
+                    isDisaster = true;
+
+                }
+                else if (energy <= 0)
+                {
+                    if (CurrentEvents[0] != null)
+                    {
+                        MajorEventonHold = CurrentEvents[0];
+                    }
+                    CurrentEvents.RemoveAt(0);
+                    addDisaster(randomEvents.GetDisasterEvent(randomEvents.powerOut));
+                    addMajor = false;
+                    isDisaster = true;
+                }
+                
+            }
+            
+
+
+
+
             if (addMajor)
             {
                 AddEvent(true);
@@ -215,11 +308,93 @@ public class TurnProgression : MonoBehaviour
             {
                 // game end
             }
+            StateCheck(CurrentEvents[0]);
             // scene.load;
             sceneEnd = true;
             ValueSlider.ResetTurn();
+
+            for (int i = 0; i < CurrentEvents.Count; i++)
+            {
+                UiEvents.addEventDescriptions(CurrentEvents[i].name, CurrentEvents[i].InitialSplash());
+            }
         }
 
+    }
+
+
+    void StateCheck(EventData majorEvent)
+    {
+        switch (majorEvent.name)
+        {
+            case "Pandemic":
+                currentState.SetActive(false);
+                currentState = pandemicState;
+                currentState.SetActive(true);
+
+                currentState2.SetActive(false);
+                currentState2 = defaultState2;
+                currentState2.SetActive(true);
+                break;
+
+            case "Foreign Invasion":
+                currentState.SetActive(false);
+                currentState = foreignState;
+                currentState.SetActive(true);
+                
+                currentState2.SetActive(false);
+                currentState2 = invasionState2;
+                currentState2.SetActive(true);
+                break;
+            case "City wide Power Outage":
+                currentState.SetActive(false);
+                currentState = powerOutageState;
+                currentState.SetActive(true);
+
+                currentState2.SetActive(false);
+                currentState2 = defaultState2;
+                currentState2.SetActive(true);
+                break;
+            case "Reactor meltdown":
+                currentState.SetActive(false);
+                currentState = defaultState;
+                currentState.SetActive(true);
+
+                currentState2.SetActive(false);
+                currentState2 = defaultState2;
+                currentState2.SetActive(true);
+                break;
+            case "Tornado":
+                currentState.SetActive(false);
+                currentState = tornadoState;
+                currentState.SetActive(true);
+
+                currentState2.SetActive(false);
+                currentState2 = tornadoState2;
+                currentState2.SetActive(true);
+                break;
+
+            case "Residential neighbourhood displaced":
+
+                currentState.SetActive(false);
+                currentState = defaultState;
+                currentState.SetActive(true);
+
+                currentState2.SetActive(false);
+                currentState2 = commCenter2; // add post state
+                currentState2.SetActive(true);
+                break;
+
+            default:
+                currentState.SetActive(false);
+                currentState = defaultState;
+                currentState.SetActive(true);
+
+                currentState2.SetActive(false);
+                currentState2 = defaultState2;
+                currentState2.SetActive(true);
+                break;
+
+        }
     }
     
 }
